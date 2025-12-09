@@ -13,7 +13,7 @@
 
 [🚀 Live Demo](https://your-demo-link.vercel.app) • [📖 Documentation](./docs) • [🐛 Report Bug](https://github.com/yourusername/EcoCode/issues) • [✨ Request Feature](https://github.com/yourusername/EcoCode/issues)
 
-<img src="./assets/screenshots/dashboard.png" alt="EcoCode Dashboard" width="800"/>
+
 
 </div>
 
@@ -96,26 +96,6 @@
 </td>
 </tr>
 </table>
-
----
-
-## 🎬 Demo
-
-<div align="center">
-
-### Code Analysis in Action
-
-<img src="./assets/screenshots/code-analyzer.gif" alt="Code Analysis Demo" width="700"/>
-
-### GitHub Repository Analysis
-
-<img src="./assets/screenshots/github-analyzer.png" alt="GitHub Analysis" width="700"/>
-
-### AI-Powered Optimization
-
-<img src="./assets/screenshots/ai-optimization.png" alt="AI Optimization" width="700"/>
-
-</div>
 
 ---
 
@@ -438,3 +418,4 @@ If you find this project useful, please consider giving it a star!
 ---
 
 **Made with 💚 for a sustainable future**
+
