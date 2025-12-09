@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npm install -g serve",
+  "outputDirectory": "frontend",
+  "devCommand": "cd frontend && npx serve .",
+  "installCommand": "echo 'No install needed for static site'"
+}

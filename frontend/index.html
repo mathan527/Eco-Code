@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCode - Carbon Footprint Analyzer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-leaf"></i>
+                <span>EcoCode</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#analyze" class="nav-link">Analyze</a>
+                <a href="#github" class="nav-link">GitHub</a>
+                <a href="#hosting" class="nav-link">Hosting</a>
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <button class="btn btn-primary" id="loginBtn">Login</button>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Measure Your Code's Carbon Footprint</h1>
+                <p class="hero-subtitle">
+                    Analyze your code, optimize performance, and reduce environmental impact with AI-powered insights
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">1.2M+</div>
+                        <div class="stat-label">Lines Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">45K+</div>
+                        <div class="stat-label">Repositories Scanned</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">230kg</div>
+                        <div class="stat-label">CO₂ Saved</div>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <button class="btn btn-large btn-primary" onclick="scrollToSection('analyze')">
+                        Start Analyzing
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-large btn-secondary">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <i class="fas fa-code"></i>
+                    <span>Code Analysis</span>
+                </div>
+                <div class="floating-card" style="animation-delay: 0.2s;">
+                    <i class="fas fa-leaf"></i>
+                    <span>Green Score</span>
+                </div>
+                <div class="floating-card" style="animation-delay: 0.4s;">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Optimization</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Analysis Section -->
+    <section id="analyze" class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Code Carbon Analyzer</h2>
+                <p class="section-subtitle">Paste your code and get instant carbon footprint analysis</p>
+            </div>
+
+            <div class="analysis-container">
+                <div class="editor-panel">
+                    <div class="panel-header">
+                        <div class="language-selector">
+                            <label for="languageSelect">Language:</label>
+                            <select id="languageSelect" class="form-select">
+                                <option value="python">Python</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="typescript">TypeScript</option>
+                                <option value="java">Java</option>
+                                <option value="cpp">C++</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-small btn-secondary" onclick="clearEditor()">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                    <div id="codeEditor" class="code-editor"></div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary btn-large" id="analyzeCodeBtn" onclick="analyzeCode()">
+                            <i class="fas fa-chart-pie"></i> Analyze Code
+                        </button>
+                    </div>
+                </div>
+
+                <div class="results-panel" id="resultsPanel" style="display: none;">
+                    <div class="panel-header">
+                        <h3>Analysis Results</h3>
+                        <button class="btn btn-small btn-secondary" onclick="hideResults()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="green-score-display" id="greenScoreDisplay">
+                        <div class="score-circle">
+                            <svg class="score-ring" viewBox="0 0 120 120">
+                                <circle class="score-ring-circle" cx="60" cy="60" r="54"></circle>
+                                <circle class="score-ring-progress" id="scoreRingProgress" cx="60" cy="60" r="54"></circle>
+                            </svg>
+                            <div class="score-text">
+                                <div class="score-value" id="greenScoreValue">0</div>
+                                <div class="score-label">Green Score</div>
+                            </div>
+                        </div>
+                        <div class="score-rating" id="scoreRating"></div>
+                    </div>
+
+                    <div class="metrics-grid" id="metricsGrid">
+                        <!-- Metrics will be populated by JavaScript -->
+                    </div>
+
+                    <div class="co2-estimate" id="co2Estimate">
+                        <div class="co2-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="co2-content">
+                            <div class="co2-label">Estimated CO₂ Impact</div>
+                            <div class="co2-value" id="co2Value">0g</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="metricsChart"></canvas>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="getAIOptimization()">
+                            <i class="fas fa-magic"></i> AI Optimization
+                        </button>
+                        <button class="btn btn-secondary" onclick="downloadReport()">
+                            <i class="fas fa-download"></i> Download Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Optimization Panel -->
+            <div class="optimization-panel" id="optimizationPanel" style="display: none;">
+                <div class="panel-header">
+                    <h3><i class="fas fa-robot"></i> AI Optimization Suggestions</h3>
+                    <button class="btn btn-small btn-secondary" onclick="hideOptimization()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="optimizationContent" class="optimization-content">
+                    <!-- AI suggestions will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Analysis Section -->
+    <section id="github" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">GitHub Repository Analyzer</h2>
+                <p class="section-subtitle">Analyze the carbon footprint of any public GitHub repository</p>
+            </div>
+
+            <div class="github-input-container">
+                <div class="input-group">
+                    <i class="fab fa-github input-icon"></i>
+                    <input 
+                        type="text" 
+                        id="githubRepoUrl" 
+                        class="form-input" 
+                        placeholder="https://github.com/username/repository"
+                    />
+                    <button class="btn btn-primary" id="analyzeGithubBtn" onclick="analyzeGithub()">
+                        Analyze Repository
+                    </button>
+                </div>
+            </div>
+
+            <div class="github-results" id="githubResults" style="display: none;">
+                <div class="repo-info-card" id="repoInfoCard">
+                    <!-- Repository info will be populated here -->
+                </div>
+                <div class="github-metrics-grid" id="githubMetricsGrid">
+                    <!-- GitHub metrics will be populated here -->
+                </div>
+                <div class="languages-chart-container">
+                    <canvas id="languagesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hosting Impact Section -->
+    <section id="hosting" class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Hosting Impact Estimator</h2>
+                <p class="section-subtitle">Calculate the carbon footprint of your hosting infrastructure</p>
+            </div>
+
+            <div class="hosting-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="providerSelect">Cloud Provider</label>
+                        <select id="providerSelect" class="form-select">
+                            <option value="aws">AWS</option>
+                            <option value="gcp">Google Cloud Platform</option>
+                            <option value="azure">Microsoft Azure</option>
+                            <option value="vercel">Vercel</option>
+                            <option value="netlify">Netlify</option>
+                            <option value="digitalocean">DigitalOcean</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regionSelect">Region</label>
+                        <select id="regionSelect" class="form-select">
+                            <option value="us-east">US East</option>
+                            <option value="us-west">US West</option>
+                            <option value="eu-west">EU West</option>
+                            <option value="eu-north">EU North</option>
+                            <option value="asia-east">Asia East</option>
+                            <option value="asia-south">Asia South</option>
+                            <option value="australia">Australia</option>
+                            <option value="south-america">South America</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tierSelect">Service Tier</label>
+                        <select id="tierSelect" class="form-select">
+                            <option value="serverless">Serverless</option>
+                            <option value="basic">Basic</option>
+                            <option value="standard">Standard</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="monthlyRequests">Monthly Requests</label>
+                        <input 
+                            type="number" 
+                            id="monthlyRequests" 
+                            class="form-input" 
+                            value="100000"
+                            min="1000"
+                            step="1000"
+                        />
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-large" onclick="calculateHostingImpact()">
+                    <i class="fas fa-calculator"></i> Calculate Impact
+                </button>
+            </div>
+
+            <div class="hosting-results" id="hostingResults" style="display: none;">
+                <div class="hosting-metrics-grid" id="hostingMetricsGrid">
+                    <!-- Hosting metrics will be populated here -->
+                </div>
+                <div class="hosting-chart-container">
+                    <canvas id="hostingChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Your Dashboard</h2>
+                <p class="section-subtitle">Track your analysis history and carbon savings</p>
+            </div>
+
+            <div id="dashboardContent" class="dashboard-content">
+                <div class="dashboard-placeholder">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <p>Please log in to view your dashboard</p>
+                    <button class="btn btn-primary" onclick="showLogin()">Log In</button>
+                </div>
+            </div>
+
+            <div id="dashboardData" class="dashboard-data" style="display: none;">
+                <div class="dashboard-stats">
+                    <div class="stat-card-large">
+                        <div class="stat-icon"><i class="fas fa-code"></i></div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalAnalyses">0</div>
+                            <div class="stat-label">Total Analyses</div>
+                        </div>
+                    </div>
+                    <div class="stat-card-large">
+                        <div class="stat-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="avgGreenScore">0</div>
+                            <div class="stat-label">Avg Green Score</div>
+                        </div>
+                    </div>
+                    <div class="stat-card-large">
+                        <div class="stat-icon"><i class="fas fa-cloud"></i></div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalCO2">0g</div>
+                            <div class="stat-label">Total CO₂ Analyzed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-section">
+                    <h3>Recent Analyses</h3>
+                    <div id="historyList" class="history-list">
+                        <!-- History items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-leaf"></i> EcoCode</h3>
+                    <p>Making software development more sustainable, one line of code at a time.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#analyze">Analyze</a></li>
+                        <li><a href="#github">GitHub</a></li>
+                        <li><a href="#hosting">Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EcoCode. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>Analyzing...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/analyzer.js"></script>
+    <script src="js/github.js"></script>
+    <script src="js/hosting.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

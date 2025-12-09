@@ -1,0 +1,19 @@
+{
+  "name": "ecocode-backend",
+  "version": "1.0.0",
+  "description": "EcoCode Carbon Footprint Analyzer Backend API",
+  "main": "main.py",
+  "scripts": {
+    "start": "uvicorn main:app --reload",
+    "dev": "uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+    "test": "pytest"
+  },
+  "keywords": [
+    "carbon-footprint",
+    "code-analysis",
+    "sustainability",
+    "fastapi"
+  ],
+  "author": "EcoCode Team",
+  "license": "MIT"
+}
