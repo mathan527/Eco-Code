@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌿 EcoCode – Carbon Footprint Analyzer
+#  EcoCode – Carbon Footprint Analyzer
 
 ### *Making software development more sustainable, one line of code at a time*
 
@@ -418,4 +418,5 @@ If you find this project useful, please consider giving it a star!
 ---
 
 **Made with 💚 for a sustainable future**
+
 
